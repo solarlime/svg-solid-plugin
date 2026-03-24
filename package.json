@@ -1,0 +1,69 @@
+{
+  "name": "svg-solid-plugin-monorepo",
+  "version": "1.0.0",
+  "description": "Monorepo for SVG Solid Plugin - Build tools for integrating SVG components with SolidJS",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.32.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/solarlime/svg-solid-plugin.git"
+  },
+  "keywords": [
+    "svg",
+    "solid",
+    "solidjs",
+    "rspack",
+    "webpack",
+    "plugin",
+    "loader",
+    "jsx",
+    "component",
+    "svgo",
+    "build-tools",
+    "monorepo"
+  ],
+  "author": {
+    "name": "solarlime",
+    "url": "https://github.com/solarlime"
+  },
+  "license": "MIT",
+  "scripts": {
+    "lint": "pnpm biome check --write .",
+    "lint:check": "pnpm biome check .",
+    "type-check": "pnpm -r type-check",
+    "test": "pnpm -r test",
+    "test:watch": "pnpm -r test:watch",
+    "test:coverage": "pnpm -r test:coverage",
+    "clean": "pnpm -r clean",
+    "changeset": "changeset",
+    "release": "changeset publish",
+    "prepare": "husky",
+    "preinstall": "npx only-allow pnpm"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.8",
+    "@changesets/cli": "^2.30.0",
+    "@commitlint/cli": "^20.4.4",
+    "@commitlint/config-conventional": "^20.4.4",
+    "@types/node": "^24.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.3.4",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=24",
+    "pnpm": ">=10"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "lint-staged": {
+    "*.{js,ts,jsx,tsx,json,md}": [
+      "biome check --write --no-errors-on-unmatched"
+    ],
+    "*.{ts,tsx}": [
+      "pnpm type-check"
+    ]
+  }
+}
