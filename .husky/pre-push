@@ -6,6 +6,6 @@ echo "🚀 Running pre-push checks..."
 pnpm lint:check
 
 # Build package
-pnpm build:rspack
+pnpm build
 
 echo "✅ Pre-push checks passed!"

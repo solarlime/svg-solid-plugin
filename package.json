@@ -1,61 +1,93 @@
 {
-  "name": "svg-solid-plugin-monorepo",
-  "version": "1.0.0",
-  "description": "Monorepo for SVG Solid Plugin - Build tools for integrating SVG components with SolidJS",
-  "private": true,
+  "name": "@svg-solid-plugin/rspack",
+  "version": "0.0.0",
+  "description": "Universal plugin for transforming SVG files into SolidJS components. Works with both Rspack and Webpack.",
+  "author": "solarlime",
   "type": "module",
   "packageManager": "pnpm@10.32.1",
+  "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/solarlime/svg-solid-plugin.git"
+    "url": "git+https://github.com/solarlime/svg-solid-plugin.git"
   },
+  "homepage": "https://github.com/solarlime/svg-solid-plugin/tree/main/packages/rspack",
+  "bugs": {
+    "url": "https://github.com/solarlime/svg-solid-plugin/issues"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.mts"
+    }
+  },
+  "main": "dist/index.mjs",
+  "types": "dist/index.d.mts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "keywords": [
     "svg",
     "solid",
     "solidjs",
+    "solid-js",
     "rspack",
     "webpack",
     "plugin",
     "loader",
     "jsx",
     "component",
-    "svgo",
-    "build-tools",
-    "monorepo"
+    "svgo"
   ],
-  "author": {
-    "name": "solarlime",
-    "url": "https://github.com/solarlime"
-  },
-  "license": "MIT",
   "scripts": {
-    "build:rspack": "pnpm -C packages/rspack build",
-    "dev:rspack": "pnpm -C packages/rspack dev",
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "clean": "tsdown --clean",
     "lint": "pnpm biome check --write .",
     "lint:check": "pnpm biome check .",
-    "type-check": "pnpm -r type-check",
-    "test": "pnpm -r test",
-    "test:watch": "pnpm -r test:watch",
-    "test:coverage": "pnpm -r test:coverage",
-    "clean": "pnpm -r clean",
+    "type-check": "tscw",
+    "test": "node --test",
+    "test:watch": "node --test --watch",
+    "test:coverage": "node --test --experimental-test-coverage",
     "changeset": "changeset",
     "release": "changeset publish",
-    "prepare": "husky",
-    "preinstall": "npx only-allow pnpm"
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "svgo": "^4.0.1"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.8",
+    "@biomejs/biome": "2.4.10",
     "@changesets/cli": "^2.30.0",
     "@commitlint/cli": "^20.4.4",
     "@commitlint/config-conventional": "^20.4.4",
-    "@types/node": "^24.0.0",
+    "@rspack/core": "^1.7.10",
+    "@types/node": "^20.0.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.3.4",
-    "typescript": "^5.9.3"
+    "tscw-config": "^1.1.2",
+    "tsdown": "^0.21.4",
+    "typescript": "^5.9.3",
+    "webpack": "^5.105.4"
+  },
+  "peerDependencies": {
+    "@rspack/core": "^1",
+    "babel-loader": "^10",
+    "babel-preset-solid": "^1",
+    "solid-js": "^1",
+    "webpack": "^5"
+  },
+  "peerDependenciesMeta": {
+    "webpack": {
+      "optional": true
+    },
+    "@rspack/core": {
+      "optional": true
+    }
   },
   "engines": {
-    "node": ">=24",
-    "pnpm": ">=10"
+    "node": ">=24"
   },
   "publishConfig": {
     "access": "public"
@@ -64,8 +96,8 @@
     "*.{js,ts,jsx,tsx,json,md}": [
       "biome check --write --no-errors-on-unmatched"
     ],
-    "packages/rspack/*.{ts,tsx}": [
-      "pnpm -C packages/rspack type-check"
+    "src/*.{ts,tsx}": [
+      "pnpm type-check"
     ]
   }
 }

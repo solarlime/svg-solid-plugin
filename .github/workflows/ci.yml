@@ -39,4 +39,4 @@ jobs:
         run: pnpm test
 
       - name: Build packages
-        run: pnpm build:rspack
+        run: pnpm build

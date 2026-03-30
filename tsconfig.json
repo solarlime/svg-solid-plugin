@@ -11,11 +11,12 @@
     "skipLibCheck": true,
     "outDir": "dist",
     "declaration": true,
-    "declarationMap": true,
+    "declarationMap": false,
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["dist", "node_modules", "tsdown.config.ts"]
 }
