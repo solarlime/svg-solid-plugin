@@ -2,7 +2,8 @@ import { loadConfig, type Config as OptimizeOptions, optimize } from 'svgo';
 
 export function compileSvg(source: string) {
   const svgWithProps = source
-    .replace(/<(\?xml[^>]*>)/i, '')
+    .replace(/<\?xml[^>]*>/gi, '')
+    .replace(/<!DOCTYPE[^>]*>/gi, '')
     .replace(/<!--\s*([\s\S]*?)\s*-->/g, '{/* $1 */}')
     .replace(/(<svg[^>]*)>/i, '$1{...props}>');
   return `export default (props = {}) => ${svgWithProps}`;

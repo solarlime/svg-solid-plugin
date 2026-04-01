@@ -38,11 +38,13 @@ describe('Utils', () => {
     test('should handle empty SVG', () => {
       const svg = `
         <?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
         <svg></svg>
       `;
       const result = compileSvg(svg);
 
       assert.ok(!result.includes('<?xml'));
+      assert.ok(!result.includes('<?doctype'));
       assert.ok(result.includes('export default (props = {}) =>'));
     });
   });
