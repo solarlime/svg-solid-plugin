@@ -9,6 +9,7 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  id-token: write
 
 concurrency:
   group: release
@@ -38,6 +39,9 @@ jobs:
           cache: 'pnpm'
           registry-url: 'https://registry.npmjs.org'
 
+      - name: Upgrade npm
+        run: npm install -g npm@11
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
@@ -57,5 +61,3 @@ jobs:
           commit: "chore: new release"
           title: "chore: new release"
           createGithubReleases: true
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
