@@ -1,18 +1,8 @@
-import { join } from 'node:path';
 import type { Compiler as RspackCompiler } from '@rspack/core';
-import type { Config as SvgoOptions } from 'svgo';
 import type { Compiler as WebpackCompiler } from 'webpack';
+import { createSvgSolidRules, type LoaderOptions, loaderPath } from './core.ts';
 
 export type Compiler = RspackCompiler | WebpackCompiler;
-
-export type LoaderOptions = {
-  svgo?: {
-    enabled?: boolean;
-    svgoConfig?: SvgoOptions;
-  };
-};
-
-export const loaderPath = join(import.meta.dirname, 'loader.mjs');
 
 export class RspackPluginSolidSvg {
   name = 'rspack-plugin-solid-svg';
@@ -21,7 +11,7 @@ export class RspackPluginSolidSvg {
   constructor(private options: LoaderOptions = {}) {}
 
   apply(compiler: Compiler) {
-    const { svgo = { enabled: true } } = this.options;
+    const pluginRules = createSvgSolidRules(this.options);
 
     if (!compiler.options.module) {
       compiler.options.module = {
@@ -37,29 +27,12 @@ export class RspackPluginSolidSvg {
         // Rule for SVG files with ?solid query (as JSX components)
         {
           test: /\.svg$/,
-          resourceQuery: /\?solid/,
-          use: [
-            {
-              loader: 'babel-loader',
-              options: {
-                presets: ['solid'],
-              },
-            },
-            {
-              loader: loaderPath,
-              options: { svgo },
-            },
-          ],
-          type: 'javascript/auto',
+          ...pluginRules.solid,
         },
         // Rule for regular SVG files (as URLs)
         {
           test: /\.svg$/,
-          resourceQuery: { not: [/\?solid/] },
-          type: 'asset/resource',
-          generator: {
-            filename: 'assets/[name].[hash][ext]',
-          },
+          ...pluginRules.assetResource,
         },
       ],
     });
