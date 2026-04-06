@@ -1,5 +1,16 @@
 # rspack-plugin-solid-svg
 
+## 1.1.0
+
+### Minor Changes
+
+- 4a5c322: Full Rsbuild support
+
+  - Refactored the core structure
+  - Added Rsbuild logic
+  - Added an Rsbuild example
+  - Updated docs
+
 ## 1.0.1
 
 ### Patch Changes
