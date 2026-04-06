@@ -18,8 +18,17 @@
     ".": {
       "import": "./dist/index.mjs",
       "types": "./dist/index.d.mts"
+    },
+    "./rspack": {
+      "import": "./dist/rspack.mjs",
+      "types": "./dist/rspack.d.mts"
+    },
+    "./rsbuild": {
+      "import": "./dist/rsbuild.mjs",
+      "types": "./dist/rsbuild.d.mts"
     }
   },
+  "sideEffects": false,
   "main": "dist/index.mjs",
   "types": "dist/index.d.mts",
   "files": [

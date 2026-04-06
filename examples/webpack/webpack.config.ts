@@ -1,5 +1,7 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import { RspackPluginSolidSvg } from 'rspack-plugin-solid-svg';
+import { RspackPluginSolidSvg } from 'rspack-plugin-solid-svg/rspack';
+
+// import { RspackPluginSolidSvg } from 'rspack-plugin-solid-svg'; // another way
 
 const config = {
   entry: {

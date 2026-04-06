@@ -1,15 +1,18 @@
-import { defineConfig } from 'tsdown';
+import { defineConfig, type UserConfig } from 'tsdown';
 
-export default defineConfig({
-  entry: ['src/index.ts', 'src/loader.ts'],
+const restOptions: Omit<UserConfig, 'entry'> = {
   format: ['esm'],
   dts: true,
   clean: true,
   minify: false,
   deps: {
-    neverBundle: ['svgo', '@rspack/core', 'webpack'],
+    neverBundle: ['svgo', '@rspack/core', 'webpack', '@rsbuild/core'],
   },
-  onSuccess: async () => {
-    console.log('✅ Build completed!');
-  },
-});
+};
+
+export default defineConfig([
+  { entry: 'src/index.ts', ...restOptions },
+  { entry: 'src/rspack.ts', ...restOptions },
+  { entry: 'src/rsbuild.ts', ...restOptions },
+  { entry: 'src/loader.ts', ...restOptions },
+]);

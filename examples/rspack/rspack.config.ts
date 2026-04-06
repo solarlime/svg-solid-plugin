@@ -2,6 +2,8 @@ import { defineConfig } from '@rspack/cli';
 import { type RspackOptions, rspack } from '@rspack/core';
 import { RspackPluginSolidSvg } from 'rspack-plugin-solid-svg';
 
+// import { RspackPluginSolidSvg } from 'rspack-plugin-solid-svg/rspack'; // another way
+
 const config: RspackOptions = defineConfig({
   entry: {
     main: './src/App.tsx',
